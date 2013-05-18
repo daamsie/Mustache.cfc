@@ -288,6 +288,22 @@
 		<cfset expected = "<ul><li>Say Goodnight, Gracie.</li><li>Goodnight</li></ul>"/>
 
 	</cffunction>
+	
+	<cffunction name="nestedPartial">
+
+		<cfscript>
+			template = "Roy G Biv is a {{> level_1_partial}}";
+			partials =
+			{
+				level_1_partial = "{{hue}} {{> level_2_partial}}.",
+				level_2_partial = "{{gender}}"
+			};
+		</cfscript>
+
+		<cfset context = { gender = 'man', hue = 'colorful' }/>
+		<cfset expected = "Roy G Biv is a colorful man."/>
+
+	</cffunction>
 
 	<cffunction name="invertedSectionHiddenIfStructureNotEmpty">
 		<cfset context =  {set = {something='whatever'}}  />
